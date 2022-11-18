@@ -76,6 +76,17 @@ class MyApp extends StatelessWidget {
               UserProductsScreen.routeName: (ctx) => const UserProductsScreen(),
             },
             onGenerateRoute: (settings) {
+              if (settings.name == ProductDetailScreen.routeName) {
+                final productId = settings.arguments as String;
+                return MaterialPageRoute(
+                  builder: (context) {
+                    return ProductDetailScreen(
+                      // ProductsManager().findById(productId),
+                      context.read<ProductsManager>().findById(productId),
+                    );
+                  },
+                );
+              
               if (settings.name == EditProductScreen.routeName) {
                 final productId = settings.arguments as String?;
                 return MaterialPageRoute(
